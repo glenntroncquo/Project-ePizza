@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .m-w-top {
+    max-width: 53.25rem;
+  }
+
+  .m-w-landing {
+    max-width: 51.5rem;
+  }
+
+  .m-w-card {
+    max-width: 24.5rem;
+  }
+
+  .h-order {
+    height: 508px;
+  }
+}
+
+:root {
+  scroll-behavior: smooth;
+
+   {
+    /* Code for Firefox */
+    color: red;
+    background: yellow;
+  }
+}
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: lightblue;
+}
+
+::selection {
+  color: white;
+  background: lightblue;
+}
+
+.moving-bg {
+  background: linear-gradient(-45deg, #ee7752, #FFAEAE, #FBA1A2, #ffb6b6);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
