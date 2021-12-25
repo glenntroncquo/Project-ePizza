@@ -1,0 +1,32 @@
+[
+  {
+    "user_id": "yLL8r5C1iyWDEqjUQ0oiAs3arI32",
+    "name": "Glenn",
+    "lastname": "Troncquo",
+    "email": "glenntroncquo1@gmail.com",
+    "birthdate": "2001-06-20",
+    "phone_nr": "+32496054389"
+  },
+  {
+    "user_id": "Fry7xgzP2MQM79iZNhC35oCZDIL2",
+    "name": "Wout",
+    "lastname": "Vancoppenolle",
+    "email": "woutvancoppenolle6@gmail.com",
+    "birthdate": "2000-06-20",
+    "phone_nr": "+32496054389"
+  },
+  {
+    "name": "Niels",
+    "lastname": "Onderbeke",
+    "email": "niels@gmail.com",
+    "birthdate": "2001-06-20",
+    "phone_nr": "+32496054389"
+  },
+  {
+    "name": "Maxime",
+    "lastname": "Vermeeren",
+    "email": "maxime@gmail.com",
+    "birthdate": "2001-06-20",
+    "phone_nr": "+32496054389"
+  }
+]
