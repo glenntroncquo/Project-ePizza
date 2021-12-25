@@ -39,8 +39,20 @@ export default defineComponent({
     let displayName = ref<string>(user.value.displayName)
     let email = ref<string>(user.value.email)
 
+    const address = reactive({
+      address_id: '',
+      city: '',
+      street: '',
+      number: '',
+      zip_code: '',
+    })
+
+    const file: any = ref(null)
+    const storage = getStorage(app)
+
     const { logout } = useFirebase()
     const { push } = useRouter()
+
     const handleLogout = () => {
       logout()
       push('/')
@@ -55,7 +67,6 @@ export default defineComponent({
       })
         .then(() => {
           store.commit(MutationTypes.setName, input)
-          //store.dispatch(ActionTypes.setUser, user)
           animateCircle.value = false
         })
         .catch((error) => {
@@ -65,13 +76,8 @@ export default defineComponent({
       animateCircle.value = false
     }
 
-    const file: any = ref(null)
-    const storage = getStorage(app)
-
     const handleFileUpload = async () => {
       const auth: any = getAuth()
-      // debugger;
-      //Upload to server
       const uploadImage = stRef(
         storage,
         `profilePicture/${user.value.uid}/${file.value.files[0].name}`,
@@ -83,19 +89,12 @@ export default defineComponent({
           `profilePicture/${user.value.uid}/${file.value.files[0].name}`,
         ),
       ).then((url) => {
+        profileImg.value = url
         updateProfile(auth.currentUser, {
           photoURL: url,
         })
       })
     }
-
-    const address = reactive({
-      address_id: '',
-      city: '',
-      street: '',
-      number: '',
-      zip_code: '',
-    })
 
     const getUserAddress = async () => {
       try {
@@ -115,8 +114,6 @@ export default defineComponent({
         addressInputDisabled.value = true
       }
     }
-
-    getUserAddress()
 
     const editAddress = async () => {
       animateCircle2.value = true
@@ -147,6 +144,8 @@ export default defineComponent({
       animateCircle2.value = false
     }
 
+    getUserAddress()
+
     return {
       user,
       nameInput,
@@ -172,17 +171,9 @@ export default defineComponent({
 <template>
   <div class="container mx-auto p-4 py-8 sm:p-8 md:px-0">
     <AppHeader />
-    <div
-      class="
-        flex flex-col
-        justify-center
-        mx-auto
-        mt-12
-        md:max-w-4xl md:w-screen
-      "
-    >
+    <div class="flex flex-col justify-center mx-auto mt-12 md:max-w-4xl">
       <div class="flex flex-row items-center space-x-6">
-        <label v-if="user.photoURL === null">
+        <label v-if="profileImg === null">
           <div
             class="
               rounded-full
@@ -210,7 +201,7 @@ export default defineComponent({
             <input
               ref="file"
               accept="image/x-png,image/gif,image/jpeg"
-              v-on:change="handleFileUpload()"
+              @change="handleFileUpload"
               style="display: none"
               type="file"
             />
@@ -237,7 +228,7 @@ export default defineComponent({
           <input
             ref="file"
             accept="image/x-png,image/gif,image/jpeg"
-            v-on:change="handleFileUpload()"
+            @change="handleFileUpload"
             style="display: none"
             type="file"
           />
@@ -245,7 +236,7 @@ export default defineComponent({
 
         <div>
           <p class="text-xl sm:text-2xl md:text-3xl font-semibold">
-            {{ user.displayName }}
+            {{ displayName }}
           </p>
           <p class="text-sm sm:text-lg md:text-xl">
             {{ email }}
@@ -254,16 +245,14 @@ export default defineComponent({
       </div>
       <section class="mt-6 md:mt-10 bg-white rounded-2xl py-8 px-4 sm:p-8">
         <div class="flex flex-row justify-between items-center">
-          <h1 class="font-semibold text-lg sm:text-2xl">
-            {{ $t('account_title') }}
-          </h1>
+          <h1 class="font-semibold text-lg sm:text-2xl">Account details</h1>
           <LanguageChanger
             background="white"
             class="max-w-[7rem] sm:max-w-full"
           />
         </div>
         <div class="mt-6">
-          <p class="text-sm text-gray-600">{{ $t('account_name') }}</p>
+          <p class="text-sm text-gray-600">Display name</p>
           <div class="flex flex-row justify-between items-center">
             <p v-if="!nameInput" class="text-lg font-medium">
               {{ name }}
@@ -274,7 +263,7 @@ export default defineComponent({
               name=""
               valua=""
               id=""
-              :placeholder="user.displayName"
+              :placeholder="displayName"
               v-model="displayName"
               class="
                 outline-none
@@ -289,7 +278,7 @@ export default defineComponent({
             <div class="flex flex-row space-x-2 sm:space-x-4">
               <button
                 v-if="nameInput"
-                @click=";(nameInput = false), (displayName = user.displayName)"
+                @click=";(nameInput = false), (displayName = displayName)"
                 class="
                   px-3
                   py-2
@@ -397,16 +386,13 @@ export default defineComponent({
                 </svg>
               </div>
 
-              <p v-if="!animateCircle">
-                {{ $t('btn_edit') }}
-              </p>
+              <p v-if="!animateCircle">Edit</p>
             </button>
           </div>
         </div>
         <div class="mt-6">
           <div class="flex flex-row justify-between items-center">
             <div
-              class="h-80"
               :class="
                 addressInputDisabled === true
                   ? 'opacity-60 pointer-events-none'
@@ -418,45 +404,45 @@ export default defineComponent({
                 id="city"
                 placeholder="Kortrijk"
                 type="text"
-                :label="$t('order_city')"
+                label="City"
                 :accountFull="true"
                 :disabled="addressInputDisabled"
                 v-model="address.city"
               />
               <InputComponent
                 class="md:ml-0 w-full"
-                id="street address"
+                id="street"
                 placeholder="Graaf Karel De Goedelaan"
                 type="text"
-                :label="$t('order_street')"
+                label="Street"
                 :accountFull="true"
                 :disabled="addressInputDisabled"
                 v-model="address.street"
               />
-              <div class="flex">
+              <div class="sm:flex gap-4">
                 <InputComponent
-                  class="md:ml-0 w-1/2 mr-2"
+                  class="md:ml-0 sm:w-1/2"
                   id="number"
                   placeholder="32"
                   type="text"
-                  :label="$t('order_streetnr')"
+                  label="Number"
                   :accountFull="true"
                   :disabled="addressInputDisabled"
                   v-model="address.number"
                 />
                 <InputComponent
-                  class="md:ml-2 ml-2"
-                  id="zip code"
+                  class="md:ml-2"
+                  id="zip"
                   placeholder="8500"
                   type="text"
-                  :label="$t('order_zip')"
+                  label="Zip"
                   :accountFull="true"
                   :disabled="addressInputDisabled"
                   v-model="address.zip_code"
                 />
               </div>
             </div>
-            <div class="flex flex-row space-x-2 sm:space-x-4">
+            <div class="flex flex-row gap-2 sm:gap-2 ml-2">
               <button
                 v-if="!addressInputDisabled"
                 @click="addressInputDisabled = true"
@@ -567,9 +553,7 @@ export default defineComponent({
                 </svg>
               </div>
 
-              <p v-if="!animateCircle2">
-                {{ $t('btn_edit') }}
-              </p>
+              <p v-if="!animateCircle2">Edit</p>
             </button>
           </div>
         </div>
@@ -591,7 +575,7 @@ export default defineComponent({
               duration-300
             "
           >
-            {{ $t('btn_signout') }}
+            Sign out
           </button>
         </section>
       </section>

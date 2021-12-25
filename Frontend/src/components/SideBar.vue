@@ -29,12 +29,11 @@ export default defineComponent({
           h-full
           items-center
           sm:items-start sm:mt-2
-          flex
-          flex-row-reverse
+          flex flex-row-reverse
           justify-around
           sm:justify-start sm:flex-col sm:gap-4
-           pt-3
-           md:pt-0
+          pt-3
+          md:pt-0
           px-6
           sm:px-0
         "
@@ -182,7 +181,7 @@ export default defineComponent({
             </p>
           </div>
         </router-link>
-        
+
         <router-link to="/" class="md:hidden sm:ml-7">
           <div class="flex items-center router-link">
             <div
@@ -197,13 +196,11 @@ export default defineComponent({
               "
             >
               <svg
-                class="stroke-current text-gray-500"
+                class="stroke-current text-gray-500 house"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="#000000"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -232,13 +229,12 @@ export default defineComponent({
             "
           >
             <svg
-              class="stroke-current text-gray-500"
+              class="stroke-current text-gray-500 house"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#000000"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -267,6 +263,7 @@ export default defineComponent({
 }
 .router-link-active svg {
   fill: #f54749;
+  stroke: #f54749;
 }
 
 .router-link:hover .router-link-svg {
@@ -295,5 +292,9 @@ nav:hover p {
 
 .router-link:hover svg {
   fill: #f54749;
+}
+.router-link:hover .house {
+  fill: none;
+  stroke: #f54749;
 }
 </style>

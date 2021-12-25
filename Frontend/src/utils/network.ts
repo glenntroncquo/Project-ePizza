@@ -1,7 +1,7 @@
 import { Review } from '../interfaces/review'
 import { User } from '../interfaces/user'
 
-const url = 'http://localhost:30601'
+const url = 'http://localhost:3001'
 export const signUp = async (endpoint: string, body: User) =>
   fetch(`${url}/${endpoint}`, {
     method: 'POST',

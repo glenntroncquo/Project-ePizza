@@ -193,7 +193,6 @@ export default defineComponent({
       <div
         to="/"
         class="p-4 bg-red-400 text-lg text-white left-0 shadow-lg h-16"
-        :style="menuActive === true ? '' : 'transition-delay: 0.3s'"
         :key="1"
         v-show="menuActive"
       >
@@ -226,11 +225,6 @@ export default defineComponent({
           flex
           justify-center
         "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.1s'
-            : 'transition-delay: 0.2s'
-        "
         :key="3"
         v-show="menuActive"
         @click="
@@ -254,11 +248,6 @@ export default defineComponent({
           shadow-lg
           flex
           justify-center
-        "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.2s'
-            : 'transition-delay: 0.1s'
         "
         :key="4"
         v-show="menuActive"
@@ -284,7 +273,6 @@ export default defineComponent({
           justify-center
           items-center
         "
-        :style="menuActive === true ? 'transition-delay: 0.3s' : ''"
         :key="5"
         v-show="menuActive"
         @click="menuActive = !menuActive"
@@ -445,11 +433,6 @@ export default defineComponent({
           flex
           justify-center
         "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.2s'
-            : 'transition-delay: 0.1s'
-        "
         :key="1"
         v-show="menuActive"
         @click="
@@ -475,11 +458,6 @@ export default defineComponent({
           justify-center
           items-center
         "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.1s'
-            : 'transition-delay: 0.2s'
-        "
         :key="2"
         v-show="menuActive"
         @click="menuActive = !menuActive"
@@ -498,11 +476,6 @@ export default defineComponent({
           shadow-lg
           flex
           justify-center
-        "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.1s'
-            : 'transition-delay: 0.2s'
         "
         :key="3"
         v-show="menuActive"
@@ -530,11 +503,6 @@ export default defineComponent({
           flex
           justify-center
         "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.1s'
-            : 'transition-delay: 0.2s'
-        "
         :key="4"
         v-show="menuActive"
         @click="
@@ -559,11 +527,7 @@ export default defineComponent({
           flex
           justify-center
         "
-        :style="
-          menuActive === true
-            ? 'transition-delay: 0.1s'
-            : 'transition-delay: 0.2s'
-        "
+        :key="5"
         v-show="menuActive"
         @click="
           () => {

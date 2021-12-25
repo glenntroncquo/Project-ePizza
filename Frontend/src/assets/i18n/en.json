@@ -65,7 +65,7 @@
     "order_city": "City",
     "order_street": "Street Address",
     "order_streetnr": "Number",
-    "order_zip": "Zip code",
+    "order_zip": "Zip",
     "order_change": "Change details",
     "account_title": "Account details",
     "account_name": "Display name",
