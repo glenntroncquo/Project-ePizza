@@ -2,7 +2,7 @@
 Important note: Backend is not hosted!!
 Take a look 👀👀
 
-# Run the whole project on your own pc with Docker!
+## Run the whole project on your own pc with Docker!
 docker-compose.yml:
 
 services:
@@ -30,10 +30,10 @@ services:
       - docker.ormconfig.env
     depends_on:
       - mariadb
-  # vue:
-  #   image: glenntroncquo/project-frontend:2.0.1
-  #   ports:
-  #     - 8080:8080
+   vue:
+     image: glenntroncquo/project-frontend:2.0.1
+     ports:
+       - 8080:8080
   
 
 volumes:
