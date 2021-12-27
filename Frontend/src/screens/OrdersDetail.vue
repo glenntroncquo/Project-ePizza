@@ -19,7 +19,7 @@ export default defineComponent({
       history.pushState(
         {},
         '',
-        `https://jovial-wescoff-be1c85.netlify.app/orders/detail/${order.value?.order_id}`,
+        `https://localhost:8080/${order.value?.order_id}`,
       )
     } else getOrder()
     return { order }

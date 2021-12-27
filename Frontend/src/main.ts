@@ -43,7 +43,7 @@ import useFirebase from './composables/useFirebase'
   }
 
   const i18n = createI18n({
-    locale: lang,
+    locale: 'en',
     fallbackLocale: 'en',
     messages,
   })

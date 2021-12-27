@@ -44,7 +44,7 @@ export default defineConfig({
   plugins: [vue(), VitePWA(pwaOptions)],
 
   server: {
-    port: 8888,
+    port: 8080,
     https: true,
   },
 })
