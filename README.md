@@ -3,7 +3,6 @@ Take a look 👀👀
 https://project-epizza.netlify.app/
 
 ## Run the whole project on your own pc with Docker!
-the docker-compose.yml file:
 
 services:
   mariadb:
