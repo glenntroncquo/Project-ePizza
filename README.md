@@ -1,9 +1,9 @@
 # Project-ePizza
-Important note: Backend is not hosted!!
 Take a look 👀👀
+https://project-epizza.netlify.app/
 
 ## Run the whole project on your own pc with Docker!
-docker-compose.yml:
+the docker-compose.yml file:
 
 services:
   mariadb:
@@ -23,18 +23,17 @@ services:
       - mariadb
 
   api:
-    build: .
+    image: glenntroncquo/project-backend:3.0.0
     ports:
       - 3001:3001
     env_file:
       - docker.ormconfig.env
     depends_on:
       - mariadb
-   vue:
-     image: glenntroncquo/project-frontend:2.0.1
-     ports:
-       - 8080:8080
-  
+  vue:
+    image: glenntroncquo/project-frontend:3.0.0
+    ports:
+      - 8080:8080
 
 volumes:
   database-pizza:
